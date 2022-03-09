@@ -31,7 +31,7 @@ public class CreateAppointmentSteps{
 
     @Given("user sets the path params")
     public void user_sets_the_path_params() {
-        spec.pathParams("first", "api", "second", "appointments","third","request");
+        spec.pathParams("first", "api");
 
 
     }
@@ -58,7 +58,7 @@ public class CreateAppointmentSteps{
     public void user_sends_the_request_and_gets_the_response() {
 
 
-        response = given().spec(spec).contentType(ContentType.JSON).body(appointment).when().post("/{first}/{second}/{third}");
+        response = given().spec(spec).contentType(ContentType.JSON).body(appointment).when().post("/{first}");
     }
     @When("user saves the api records to correspondent files")
     public void user_saves_the_api_records_to_correspondent_files() {
@@ -71,10 +71,6 @@ public class CreateAppointmentSteps{
         response.prettyPrint();
 
 
-        Map<String,Object> actualData = response.as(HashMap.class);
-
-        assertEquals(appointment.getFirstName(),((Map)actualData.get("patient")).get("firstName"));
-        assertEquals(appointment.getSsn(),((Map)((Map)actualData.get("patient")).get("user")).get("ssn"));
 
     }
 
